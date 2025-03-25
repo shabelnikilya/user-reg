@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mydatabase
+    username: myuser
+    password: mypassword
+    driver-class-name: org.postgresql.Driver
+  jooq:
+    sql-dialect: POSTGRES
+
+logging:
+  level:
+    org.springframework.security: TRACE
+    org.springframework.boot.autoconfigure: DEBUG
+
+app:
+  security:
+    basic:
+      enabled: true
+      openUrlPattern: "/users/reg"
