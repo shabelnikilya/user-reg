@@ -54,6 +54,7 @@ public class AuthController {
                 req.firstName(),
                 req.secondName(),
                 null,
+                req.role(),
                 req.username(),
                 req.password(),
                 req.age(),

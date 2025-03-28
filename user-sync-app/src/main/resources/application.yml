@@ -17,3 +17,5 @@ app:
     basic:
       enabled: true
       openUrlPattern: "/users/reg"
+      urlForUsers: "/users"
+      urlForAdmins: "/v1/admin"

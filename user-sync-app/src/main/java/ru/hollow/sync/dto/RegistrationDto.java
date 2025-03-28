@@ -12,6 +12,8 @@ public record RegistrationDto(
         @JsonProperty("secondName")
         String secondName,
         @JsonProperty("age")
-        Integer age
+        Integer age,
+        @JsonProperty("role")
+        String role
 ) {
 }

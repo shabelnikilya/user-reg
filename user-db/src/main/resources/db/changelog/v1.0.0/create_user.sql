@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS app_user (
     first_name VARCHAR(100) NOT NULL,
     second_name VARCHAR(100) NOT NULL,
     middle_name VARCHAR(100),
+    user_role VARCHAR(100) NOT NULL,
     username VARCHAR(100) UNIQUE NOT NULL,
     password TEXT UNIQUE NOT NULL,
     age INTEGER NOT NULL,

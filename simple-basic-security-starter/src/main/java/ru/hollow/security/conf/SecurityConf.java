@@ -8,8 +8,10 @@ import org.springframework.core.annotation.Order;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.DefaultSecurityFilterChain;
 import org.springframework.security.web.SecurityFilterChain;
 import ru.hollow.security.properties.SimpleBasicProperty;
 
@@ -27,10 +29,18 @@ public class SecurityConf {
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
+//                .sessionManagement(session -> session  // конфигурация сессии. добавляет куки в которой хранится securitycontext
+//                        .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+//                        .sessionFixation().migrateSession()
+//                        .maximumSessions(1)
+//                        .maxSessionsPreventsLogin(false)
+//                )
                 .httpBasic(Customizer.withDefaults())
                 .formLogin(Customizer.withDefaults())
                 .authorizeHttpRequests(
                         authorize -> authorize
+                                .requestMatchers(property.getUrlForAdmins()).hasRole("ADMIN")
+                                .requestMatchers(property.getUrlForUsers()).hasRole("USER")
                                 .requestMatchers(property.getOpenUrlPattern()).permitAll()
                                 .anyRequest().authenticated()
                 ).build();
